@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Komputerisasi Ak.Keu & Manajemen</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        label.form-label {
+            font-weight: bold;
+        }
+
+        h4 {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto ms-auto" href="#">Komputerisasi Ak.Keu & Manajemen</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-md-center">
+            <div class="col-xl-4 col-md-6 col-sm-8">
+                <form action="" id="suhbmitForm">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h2><b>TIME VALUE OF MONEY</b></h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="amount" class="form-label">Amount</label>
+                                <input type="number" class="form-control" id="amount" placeholder="Amount"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="yearofperiod" class="form-label">Year of Period</label>
+                                <input type="number" class="form-control" id="yearofperiod" placeholder="Year of Period"
+                                    autocomplete="off">
+                            </div>
+                            <div class="mb-3">
+                                <label for="interestrate" class="form-label">Interest Rate</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="interestrate" maxlength="3" max="100"
+                                        placeholder="Interest Rate" autocomplete="off">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="interestrate" class="form-label">Method</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="method" id="fvsa" value="fvsa"
+                                        checked autocomplete="off">
+                                    <label class="form-check-label" for="fvsa">
+                                        Future Value of Single Amount - <strong>PV(FVF<sub><em>n,i</em></sub>)</strong>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="method" id="fva" value="fva"
+                                        autocomplete="off">
+                                    <label class="form-check-label" for="fva">
+                                        Future Value of Annuity (FVA) -
+                                        <strong>R(FVF-OA<sub><em>n,i</em></sub>)</strong>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="method" id="pvsa" value="pvsa"
+                                        autocomplete="off">
+                                    <label class="form-check-label" for="pvsa">
+                                        Present Value of Single Amount - <strong>FV(PVF<sub><em>n,i</em></sub>)</strong>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="method" id="pva" value="pva"
+                                        autocomplete="off">
+                                    <label class="form-check-label" for="pva">
+                                        Present Value of Anuity - <strong>R(PVF-OA<sub><em>n,i</em></sub>)</strong>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="method" id="pvcfs" value="pvcfs"
+                                        autocomplete="off">
+                                    <label class="form-check-label" for="pvcfs">
+                                        Present Value of Cash Flow Streams -
+                                        <strong>FV(PVF<sub><em>n,i</em></sub>)</strong>
+                                    </label>
+                                </div>
+
+                            </div>
+                            <hr>
+
+                            <div class="results">
+
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted p-0">
+                            <button type="button" class="btn btn-primary w-100 rounded-0 rounded-bottom btnSubmit"
+                                id="button"><b>Process</b></button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4><b>KELOMPOK 2</b></h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <ul>
+                                <li>91121090 - AJI BANGUN PRAYOGO</li>
+                                <li>91121093 - BAYU YUDO NUMBORO</li>
+                                <li>91121084 - ELIZABET TABITA KASTILIA</li>
+                                <li>91121085 - ESA HADISTRA</li>
+                                <li>91121095 - FAIRUZ RAFIDA</li>
+                                <li>91121086 - RICHARD</li>
+                                <li>91121087 - RIZKI EKA WAHYUNI</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $('input:radio[name="method"]').change(function () {
+            $('.results').html('');
+        })
+
+        $('.btnSubmit').on('click', function (e) {
+            e.preventDefault();
+
+            const amount = $('#amount').val();
+            const yearofperiod = $('#yearofperiod').val();
+            const interestrate = $('#interestrate').val();
+            const method = $("input[type='radio'][name='method']:checked").val();
+
+            if (amount == 0 || yearofperiod == 0 || interestrate == 0) {
+                alert('Please complete form before process.')
+                return false;
+            }
+
+            $('.results').html(result(countingMethod(amount, yearofperiod, interestrate, method)));
+        })
+
+        const countingMethod = (amount, yearofperiod, interestrate, method) => {
+            let endAmount = 0;
+            let factor = 0;
+            let decimal = 0;
+
+            if (method == 'fvsa') {
+                endAmount = (amount * parseFloat((1 + (interestrate / 100)) ** yearofperiod)).toFixed(decimal);
+                factor = parseFloat((1 + (interestrate / 100)) ** yearofperiod).toFixed(5);
+            } else if (method == 'fva') {
+                endAmount = (amount * ((((1 + (interestrate / 100)) ** yearofperiod) - 1) / ((interestrate / 100)))).toFixed(decimal);
+                factor = ((((1 + (interestrate / 100)) ** yearofperiod) - 1) / ((interestrate / 100))).toFixed(5);
+            } else if (method == 'pvsa') {
+                endAmount = (amount * (1 / (1 + (interestrate / 100)) ** yearofperiod)).toFixed(decimal);
+                factor = (1 / (1 + (interestrate / 100)) ** yearofperiod).toFixed(5);
+            } else if (method == 'pva') {
+                endAmount = (amount * ((1 - (1 / (1 + (interestrate / 100)) ** yearofperiod)) / (interestrate / 100))).toFixed(decimal);
+                factor = ((1 - (1 / (1 + (interestrate / 100)) ** yearofperiod)) / (interestrate / 100)).toFixed(5);
+            } else if (method == 'pvcfs') {
+                decimal = 2;
+                endAmount = (amount * (1 / (1 + (interestrate / 100)) ** yearofperiod)).toFixed(decimal);
+                factor = (1 / (1 + (interestrate / 100)) ** yearofperiod).toFixed(5);
+            } else {
+                endAmount = 888;
+                factor = 0.888;
+            }
+
+            return {
+                'amount': amount,
+                'endAmount': endAmount,
+                'factor': factor,
+                'decimal': decimal,
+                'prefix': (method[0] == 'p') ? 'Future' : 'Present'
+            }
+        }
+
+        const result = (countingMethod) => {
+            let amount = countingMethod.amount;
+            let factor = parseFloat(countingMethod.factor).toFixed(5);
+            let endAmount = countingMethod.endAmount;
+            let startPrefix = countingMethod.prefix;
+            let endPrefix = (startPrefix == 'Present') ? 'Future' : 'Present';
+            let decimal = countingMethod.decimal;
+
+            return (
+                `
+                <table class="table text-center bg-secondary">
+                    <tr class="bg-secondary">
+                        <td>
+                            <h3>${startPrefix} Value</h3>
+                        </td>
+                        <td></td>
+                        <td>
+                            <h3>Factor</h3>
+                        </td>
+                        <td></td>
+                        <td>
+                            <h3>${endPrefix} Value</h3>
+                        </td>
+                    </tr>
+                    <tr class="bg-white">
+                        <td>
+                            <h4>${formatMoney(amount, decimal)}</h4>
+                        </td>
+                        <td>
+                            <h4>x</h4>
+                        </td>
+                        <td>
+                            <h4>${factor}</h4>
+                        </td>
+                        <td>
+                            <h4>=</h4>
+                        </td>
+                        <td>
+                            <h4>${formatMoney(endAmount, decimal)}</h4>
+                        </td>
+                    </tr>
+                </table>
+                `
+            );
+        }
+
+        function formatMoney(n, c, d, t, y) {
+            var c = isNaN(c = Math.abs(c)) ? 3 : c,
+                d = d == undefined ? "." : d,
+                t = t == undefined ? "," : t,
+                s = n < 0 ? "-" : "",
+                i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+                j = (j = i.length) > 3 ? j % 3 : 0;
+
+            return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+        }
+    </script>
+    <script type="text/javascript">
+        var integerOnly = /[0-9\.]/g;
+
+        function restrictCharacters(myfield, e, restrictionType) {
+            if (!e) var e = window.event
+            if (e.keyCode) code = e.keyCode;
+            else if (e.which) code = e.which;
+            var character = String.fromCharCode(code);
+
+            // if they pressed esc... remove focus from field...
+            if (code == 27) {
+                this.blur();
+                return false;
+            }
+
+            // ignore if they are press other keys
+            // strange because code: 39 is the down key AND ' key...
+            // and DEL also equals .
+            if (!e.ctrlKey && code != 9 && code != 8 && code != 36 && code != 37 && code != 38 && (code != 39 || (code == 39 && character == "'")) && code != 40) {
+                if (character.match(restrictionType)) {
+                    return true;
+                } else {
+                    return false;
+                }
+
+            }
+        }
+
+        $('input[type=number]').on('keypress', function () {
+            return restrictCharacters(this, event, integerOnly);
+        })
+    </script>
+</body>
+
+</html>
